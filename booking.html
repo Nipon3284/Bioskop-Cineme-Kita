@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;600;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Feather Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/styles.css" />
+
+    <!-- Alpine JS -->
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+
+    <link rel="icon" href="images/logo.png" type="image/x-icon" />
+    <title>Bioskop Mini</title>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <header>
+      <nav class="navbar">
+        <a href="index.html">Beranda</a>
+        <a href="index.html#movies">Film</a>
+        <a href="tentangkami.html">Tentang Kami</a>
+        <a href="booking.html">Booking Tempat</a>
+      </nav>
+      <div class="nav-right">
+        <a href="#" id="menu"><i data-feather="menu"></i></a>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+      <h1>Pilih Tempat Duduk</h1>
+      <div class="row">
+        <!-- Seat Selection -->
+        <div class="col-md-8">
+          <div class="screen-container">
+            <div class="screen">LAYAR</div>
+          </div>
+          <div class="seats-container"></div>
+        </div>
+
+        <!-- Order Summary -->
+        <div class="col-md-4">
+          <div class="legend">
+            <div class="legend-item">
+              <div class="seat available"></div>
+              <span>Kursi tersedia</span>
+            </div>
+            <div class="legend-item">
+              <div class="seat booked"></div>
+              <span>Kursi sudah dipesan</span>
+            </div>
+            <div class="legend-item">
+              <div class="seat selected"></div>
+              <span>Kursi pilihan kamu</span>
+            </div>
+          </div>
+
+          <div class="seating-and-summary">
+            <h4>Ringkasan Pemesanan :</h4>
+            <ul id="order-summary"></ul>
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td>Total Harga Tiket</td>
+                  <td>: <span id="total-price">Rp 0</span></td>
+                </tr>
+                <tr>
+                  <td>Total Biaya</td>
+                  <td>: <span id="final-price">Rp 0</span></td>
+                </tr>
+              </tbody>
+            </table>
+            <button class="btn btn-primary btn-block mt-3" id="checkout-btn">
+              Pembayaran
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const seatsContainer = document.querySelector('.seats-container');
+        const orderSummary = document.getElementById('order-summary');
+        const totalPriceElement = document.getElementById('total-price');
+        const finalPriceElement = document.getElementById('final-price');
+        let totalPrice = 0;
+        const seats = [];
+        const seatRows = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+        const seatPrice = 30000; // Harga kursi baru
+
+        // Generate seats
+        seatRows.forEach((row) => {
+            for (let num = 1; num <= 12; num++) {
+                const seatNumber = `${row}${num}`;
+                seats.push({ id: seatNumber, status: 'available' });
+                if (num === 6) seats.push({ id: 'spacer', status: 'spacer' });
+            }
+        });
+
+        // Load booked seats from localStorage
+        const savedBookedSeats = JSON.parse(localStorage.getItem('booked Seats')) || [];
+        const bookedSeats = new Set(savedBookedSeats);
+
+        // Apply booked seats to the grid
+        bookedSeats.forEach((seatId) => {
+            const seatIndex = seats.findIndex((seat) => seat.id === seatId);
+            if (seatIndex !== -1) seats[seatIndex].status = 'booked';
+        });
+
+        // Render seats
+        seats.forEach((seat) => {
+            const seatElement = document.createElement('div');
+            seatElement.classList.add('seat', seat.status);
+
+            if (seat.status !== 'spacer') {
+                seatElement.dataset.id = seat.id;
+                seatElement.textContent = seat.id;
+            } else {
+                seatElement.style.visibility = 'hidden';
+            }
+
+            seatsContainer.appendChild(seatElement);
+
+            seatElement.addEventListener('click', () => {
+                if (seat.status === 'available') {
+                    seatElement.classList.toggle('selected');
+                    if (seatElement.classList.contains('selected')) {
+                        const listItem = document.createElement('li');
+                        listItem.textContent = `Kursi ${seat.id} - Rp ${seatPrice.toLocaleString('id-ID')}`;
+                        listItem.dataset.id = seat.id;
+                        orderSummary.appendChild(listItem);
+                        totalPrice += seatPrice;
+                    } else {
+                        const listItemToRemove = orderSummary.querySelector(`li[data-id="${seat.id}"]`);
+                        orderSummary.removeChild(listItemToRemove);
+                        totalPrice -= seatPrice;
+                    }
+
+                    totalPriceElement.textContent = `Rp ${totalPrice.toLocaleString('id-ID')}`;
+                    const finalPrice = totalPrice;
+                    finalPriceElement.textContent = `Rp ${finalPrice.toLocaleString('id-ID')}`;
+                } else if (seat.status === 'booked') {
+                    alert('Kursi ini sudah dipesan oleh orang lain.');
+                }
+            });
+        });
+
+        // Save booked seats to localStorage when user checks out
+        document.getElementById('checkout-btn').addEventListener('click', () => {
+            const selectedSeats = Array.from(document.querySelectorAll('.seat.selected'))
+                .map((seat) => seat.dataset.id);
+            const newBookedSeats = [...bookedSeats, ...selectedSeats];
+            localStorage.setItem('bookedSeats', JSON.stringify(newBookedSeats));
+            alert('Kursi Anda berhasil dipesan!');
+            window.location.href = 'menu_pembayaran.html';
+        });
+    });
+    </script>
+  </body>
+</html>

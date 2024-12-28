@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- FONT -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;600;900&display=swap" rel="stylesheet" />
+    <!-- Feather Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/styles.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+    <!-- Alpine JS -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <link rel="icon" href="images/logo.png" type="image/x-icon" />
+    <title>Bioskop Cinema Kita</title>
+    
+    <style>
+      .-overlay {
+  display: none;
+}
+
+.-overlay.active {
+  display: flex;
+}
+
+    </style>
+
+</head>
+
+<body x-data="film">
+
+    <!-- Navbar -->
+    <header>
+      <nav class="navbar">
+        <a href="index.html">Beranda</a>
+        <a href="index.html#movies">Film</a>
+        <a href="booking.html">Booking Tempat</a>
+        <a href="request.html">Request Film</a>
+        <a href="tentangkami.html">Tentang Kami</a>
+      </nav>
+    </header>
+</div> -->
+    <!-- Beranda -->
+    <div class="beranda">
+        <h1 data-aos="fade-right">
+            Selamat Datang Di<br />
+            Bioskop Cinema Kita
+        </h1>
+        <div class="deskripsi">
+            <p>
+                Nikmati pengalaman menonton film yang berbeda di bioskop mini kami! Di
+                sini, setiap penonton mendapat perhatian khusus, dengan suasana yang
+                intim dan nyaman. Kami menghadirkan pilihan film-film terbaru serta
+                favorit sepanjang masa yang siap memanjakan mata dan telinga Anda.
+            </p>
+            <p><i>Kenapa Memilih Kami ?</i></p>
+            <p class="list">
+                <b>1. Pengalaman Unik</b> : Rasakan sensasi menonton yang lebih dekat
+                dan personal. <br />
+                <b>2. Kenyamanan Utama</b> : Kursi empuk dan ruangan yang cozy untuk
+                kenyamanan maksimal. <br />
+                <b>3. Pilihan Film Beragam</b> : Dari yang terbaru hingga klasik yang
+                tak terlupakan. <br />
+                <b>4. Akses Mudah</b> : Pesan tiket dengan mudah dan nikmati film
+                favoritmu tanpa antri.
+            </p>
+            <p>
+                Jadikan momen nontonmu lebih spesial bersama kami. Pesan tiketmu
+                sekarang dan rasakan keajaiban film dalam suasana yang lebih dekat dan
+                personal.
+            </p>
+        </div>
+    </div>
+
+    <!-- Movies -->
+    <div class="movies" id="movies">
+        <h2 data-aos="fade-down">Film</h2>
+        <div class="tanggal">
+            <div class="tanggal-item">
+                <span id="today" x-on:click="setHari('today')" x-bind:class="{ 'active': hari === 'today' }" data-aos="fade-up" >Tayang
+                    Minggu Ini</span>
+                <span class="tanggal-info" id="today-info" data-aos="fade-up">25 - 31 Ags 2024</span>
+            </div>
+            <span> | </span>
+            <div class="tanggal-item">
+                <span id="tomorrow" x-on:click="setHari('tomorrow')"
+                    x-bind:class="{ 'active': hari === 'tomorrow' }" data-aos="fade-up">Tayang Minggu Depan</span>
+                <span class="tanggal-info" id="tomorrow-info" data-aos="fade-up" >1 - 7 Sep 2024</span>
+            </div>
+        </div>
+        <div class="movies-card">
+            <template x-for="(item, index) in filteredItems" :key="index">
+                <div class="card" data-aos="zoom-in">
+                    <img :src="'images/' + item.img" :alt="item.name" />
+                    <h3 x-text="item.name"></h3>
+                    <p x-text="item.jam"></p>
+                    <a href="#" class="btn" @click="showPopup(item)" >Sinopsis</a>
+                    <a href="booking.html" class="btn btn-secondary" @click="storeTicketInfo(item)">Pesan Tiket</a>
+                </div>
+            </template>
+        </div>
+    </div>
+
+    <!-- popup Sinopsis -->
+    <div class="popup" x-show="isPopupVisible" x-transition ">
+        <div class="popcontent" >
+            <button class="close-btn" @click="closePopup()">×</button>
+            <template x-if="selectedItem">
+                <div class="sinopsis-content">
+                    <img :src="'images/' + selectedItem.img" :alt="selectedItem.name" alt="" />
+                    <div class="text-content">
+                        <h3 x-text="selectedItem.name"></h3>
+                        <p class="year-rating">
+                            <span x-text="selectedItem.year"></span> |
+                            <span x-text="selectedItem.rating"></span>
+                        </p>
+                        <p x-text="selectedItem.sinopsis"></p>
+
+                        <a class="btn btn-1" :href="selectedItem.link">trailer</a>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </div>
+<!-- Login Modal -->
+<div id="loginModal" class="modal-overlay active">
+  <div class="modal-content">
+    <h2>Login Form</h2>
+    <form id="loginForm">
+      <label for="loginEmail">Email address</label>
+      <input type="email" id="loginEmail" placeholder="Enter your email" required />
+
+      <label for="loginPassword">Password</label>
+      <input type="password" id="loginPassword" placeholder="Enter your password" required />
+
+      <button type="submit" class="btn">LOGIN</button>
+      <p>
+        Not a member? <a href="#" id="showRegister">Signup now</a>
+      </p>
+    </form>
+  </div>
+</div>
+
+<!-- Registration Modal -->
+<div id="registerModal" class="modal-overlay">
+  <div class="modal-content">
+    <h2>Register Form</h2>
+    <form id="registerForm">
+      <label for="registerName">Full Name</label>
+      <input type="text" id="registerName" placeholder="Enter your name" required />
+
+      <label for="registerEmail">Email address</label>
+      <input type="email" id="registerEmail" placeholder="Enter your email" required />
+
+      <label for="registerPassword">Password</label>
+      <input type="password" id="registerPassword" placeholder="Enter your password" required />
+
+      <label for="confirmPassword">Confirm Password</label>
+      <input type="password" id="confirmPassword" placeholder="Confirm your password" required />
+
+      <button type="submit" class="btn">REGISTER</button>
+      <p>
+        Already a member? <a href="#" id="showLogin">Login now</a>
+      </p>
+    </form>
+  </div>
+</div>
+
+
+    <div class="footer">
+        <p>Copyright 2024 | By @ KELOMPOK 5</p>
+    </div>
+    
+    <script src="js/app.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+</body>
+
+</html>

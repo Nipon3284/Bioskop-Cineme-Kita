@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    <title>Menu Pembayaran</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9f9f9;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .payment-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .payment-item {
+            cursor: pointer;
+            text-align: center;
+            width: 120px;
+        }
+
+        .payment-item img {
+            width: 100px;
+            height: auto;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .payment-item img:hover {
+            transform: scale(1.1);
+        }
+
+        .payment-item span {
+            display: block;
+            margin-top: 10px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .upload-section {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .virtual-account {
+            margin-top: 40px;
+            font-size: 18px;
+            font-weight: 500;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #fff;
+            max-width: 400px;
+            margin: 40px auto;
+            display: none;
+        }
+
+        .upload-container {
+            margin-top: 20px;
+        }
+
+        input[type="file"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .upload-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .upload-btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Pilih Metode Pembayaran</h1>
+    <div class="payment-container">
+        <div class="payment-item" onclick="showVA('GoPay', '7001 1234 5678')">
+            <img src="images/gopay.jpg" alt="GoPay">
+            <span>GoPay</span>
+        </div>
+        <div class="payment-item" onclick="showVA('Dana', '8001 8765 4321')">
+            <img src="images/dana.jpg" alt="Dana">
+            <span>Dana</span>
+        </div>
+        <div class="payment-item" onclick="showVA('ShopeePay', '9001 5678 1234')">
+            <img src="images/shoppepay.jpg" alt="ShopeePay">
+            <span>ShopeePay</span>
+        </div>
+        <div class="payment-item" onclick="showVA('OVO', '6001 4321 8765')">
+            <img src="images/ovo.jpg" alt="OVO">
+            <span>OVO</span>
+        </div>
+    </div>
+
+    <div class="virtual-account" id="va-display">
+        <p id="va-method"></p>
+        <p><strong>Virtual Account:</strong> <span id="va-number"></span></p>
+    </div>
+
+    <!-- Upload Payment Proof Section -->
+    <div class="upload-section">
+        <h2>Upload Bukti Pembayaran</h2>
+        <div class="upload-container">
+            <input type="file" id="payment-proof" name="payment-proof" accept="image/*,application/pdf">
+            <button class="upload-btn" onclick="redirectToCetak()">Upload & Cetak Tiket</button>
+        </div>
+    </div>
+
+    <script>
+        function showVA(method, vaNumber) {
+            const vaDisplay = document.getElementById('va-display');
+            const vaMethod = document.getElementById('va-method');
+            const vaNumberElement = document.getElementById('va-number');
+
+            vaMethod.innerText = `Metode Pembayaran: ${method}`;
+            vaNumberElement.innerText = vaNumber;
+
+            vaDisplay.style.display = 'block';
+        }
+
+        function redirectToCetak() {
+            // Simulate form submission to cetak.html
+            const proof = document.getElementById('payment-proof').files[0];
+            if (proof) {
+                // Assuming you handle the file submission and redirection to cetak.html
+                window.location.href = "cetak.html";
+            } else {
+                alert("Please upload the payment proof before proceeding.");
+            }
+        }
+    </script>
+
+</body>
+
+</html>

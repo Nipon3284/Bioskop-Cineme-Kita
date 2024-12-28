@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;600;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="images/logo.png" type="image/x-icon" />
+    <title>Cetak Tiket - Bioskop Mini</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .ticket {
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <div class="ticket">
+        <h1>Cetak Tiket</h1>
+        <div>
+            <h2>Kursi yang Dipilih</h2>
+            <p id="selected-seats">-</p>
+        </div>
+        <h2>Nomor Tiket</h2>
+        <div id="ticket-number">-</div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const selectedSeatsElement = document.getElementById('selected-seats');
+            const ticketNumberElement = document.getElementById('ticket-number');
+
+            // Ambil data dari localStorage
+            const bookedSeats = JSON.parse(localStorage.getItem('bookedSeats')) || [];
+
+            // Tampilkan kursi yang dipilih
+            selectedSeatsElement.textContent = bookedSeats.length > 0 ? bookedSeats.join(', ') : 'Tidak ada kursi dipilih';
+
+            // Generate random ticket number
+            const ticketNumber = Math.floor(100000 + Math.random() * 900000); // Generate a random number between 100000 and 999999
+            ticketNumberElement.textContent = ticketNumber;
+
+            // Bersihkan data saat halaman ditutup
+            window.addEventListener('beforeunload', function () {
+                localStorage.removeItem('selectedMovie');
+                localStorage.removeItem('bookedSeats');
+            });
+        });
+    </script>
+</body>
+</html>
