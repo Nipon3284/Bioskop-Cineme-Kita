@@ -1,0 +1,451 @@
+/* Gaya untuk elemen umum */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+}
+
+/* Gaya untuk kontainer utama */
+.container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Judul halaman */
+h1 {
+    text-align: center;
+}
+
+/* Gaya untuk opsi pembayaran */
+.payment-options {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.payment-option {
+    margin: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    border: 2px solid #ccc;
+    width: 200px;
+    text-align: center;
+    transition: transform 0.2s;
+    cursor: pointer;
+}
+
+.payment-option:hover {
+    transform: scale(1.05);
+}
+
+.payment-option img {
+    max-width: 100px;
+    max-height: 100px;
+    margin-bottom: 10px;
+}
+
+.payment-option h3 {
+    margin: 0;
+    font-size: 1.2em;
+}
+
+/* Gaya untuk modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 80%;
+    max-width: 400px;
+}
+
+.modal-content h2 {
+    margin-top: 0;
+}
+
+.modal-content p {
+    font-size: 1em;
+    margin: 20px 0;
+}
+
+.modal-content input[type="file"] {
+    margin: 10px 0;
+}
+
+.modal-content button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.close-btn {
+    background-color: #f44336;
+    color: white;
+}
+
+.close-btn:hover {
+    background-color: #d32f2f;
+}
+
+.confirm-btn {
+    background-color: #4caf50;
+    color: white;
+}
+
+.confirm-btn:hover {
+    background-color: #388e3c;
+}
+/* Mengatur dasar layout */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Navbar */
+  .navbar {
+    background-color: #2c3e50;
+    padding: 15px;
+    text-align: center;
+  }
+  
+  .navbar a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 18px;
+  }
+  
+  .navbar a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Container utama */
+  .container {
+    margin: 50px auto;
+    width: 80%;
+    max-width: 1000px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    text-align: center;
+  }
+  
+  h1 {
+    font-size: 32px;
+    color: #2c3e50;
+    margin-bottom: 30px;
+  }
+  
+  /* Info tiket */
+  .ticket-info {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+  }
+  
+  .ticket-info h2 {
+    font-size: 24px;
+    color: #e74c3c;
+    margin-bottom: 10px;
+  }
+  
+  .ticket-info p {
+    font-size: 18px;
+    color: #555;
+    margin: 10px 0;
+  }
+  
+  /* Styling tombol */
+  button {
+    padding: 12px 30px;
+    font-size: 18px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #2980b9;
+  }
+  
+  button:active {
+    background-color: #1c5987;
+  }
+  
+  /* Styling untuk elemen yang menampilkan harga dan waktu */
+  .ticket-info p span {
+    font-weight: bold;
+    color: #2ecc71;
+  }
+  
+  /* Efek hover pada elemen informasi tiket */
+  .ticket-info p:hover {
+    background-color: #ecf0f1;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+
+  /* Gaya Umum */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3, h4 {
+    margin: 0;
+    color: #2c3e50;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #2c3e50;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 18px;
+}
+
+.navbar a:hover {
+    text-decoration: underline;
+}
+
+/* Kontainer Utama */
+.container {
+    margin: 50px auto;
+    padding: 30px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 1000px;
+}
+
+/* Struktur Flexbox */
+.row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.col-md-8 {
+    flex: 2;
+    max-width: 65%;
+}
+
+.col-md-4 {
+    flex: 1;
+    max-width: 30%;
+}
+
+/* Ringkasan Pemesanan */
+.order-summary {
+    background: #fdfdfd;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 20px;
+}
+
+.order-summary h4 {
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.order-summary ul {
+    padding: 0;
+    margin: 10px 0;
+    list-style: none;
+}
+
+.order-summary li {
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.order-summary table {
+    width: 100%;
+    margin-top: 15px;
+}
+
+.order-summary td {
+    padding: 5px 0;
+    font-size: 16px;
+}
+
+.order-summary button {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.order-summary button:hover {
+    background-color: #27ae60;
+}
+
+/* Kursi dan Grid */
+.seats-container {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 10px;
+    background: #f7f7f7;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.seat {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #3498db;
+    color: white;
+    font-size: 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.3s;
+    height: 30px;
+}
+
+.seat.available {
+    background-color: #3498db;
+}
+
+.seat.selected {
+    background-color: #2ecc71;
+}
+
+.seat.booked {
+    background-color: #e74c3c;
+    cursor: not-allowed;
+}
+
+.seat:hover:not(.booked) {
+    transform: scale(1.1);
+}
+
+/* Legend */
+.legend {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.legend-item .seat {
+    margin-right: 10px;
+    height: 15px;
+    width: 15px;
+    font-size: 0;
+}
+
+/* Ticket Info */
+.ticket-info {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.ticket-info h2 {
+    font-size: 22px;
+    color: #e74c3c;
+    margin-bottom: 10px;
+}
+
+.ticket-info p {
+    font-size: 16px;
+    color: #555;
+    margin: 5px 0;
+}
+
+.ticket-info p span {
+    color: #3498db;
+    font-weight: bold;
+}
+
+/* Tombol */
+button {
+    padding: 12px 20px;
+    font-size: 16px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+button:active {
+    background-color: #1c5987;
+}
+
+/* Responsif */
+@media (max-width: 768px) {
+    .row {
+        flex-direction: column;
+    }
+
+    .col-md-8, .col-md-4 {
+        max-width: 100%;
+    }
+
+    .order-summary {
+        position: static;
+    }
+}
